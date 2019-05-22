@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux';
+import {increment, incrementAsync} from './actions/counter';
+import {get_users} from './actions/users';
 
-function App() {
+function App({counter, increment,incrementAsync, get_users}) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <p>{counter}</p>
+     <button onClick={increment}>+</button>
+     <br/>
+     <button onClick={incrementAsync}>async+</button>
+     <br/>
+     <button onClick={get_users}>Get Users</button>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter.count
+  }
+}
+
+
+export default connect(mapStateToProps, {increment, incrementAsync, get_users})(App);
