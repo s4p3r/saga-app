@@ -9,7 +9,7 @@ import {Provider} from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
-import {watchFetchUser} from './sagas';
+import rootSaga from './sagas';
 
 //创建中间件
 const sagaMiddleware = createSagaMiddleware();
@@ -22,7 +22,7 @@ const store = createStore(
 )
 
 //运行saga
-sagaMiddleware.run(watchFetchUser);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
 <Provider store={store}>
